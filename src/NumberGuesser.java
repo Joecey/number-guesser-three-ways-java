@@ -70,6 +70,28 @@ public class NumberGuesser {
         System.out.println("Do-Loop Version");
         Random rand = new Random();
         targetNumber = rand.nextInt(1, 101); // better
+        int counter = 0;
+
+        do{
+            System.out.println("*** What is your guess (Between 1 and 100)? ***");
+            System.out.println((MAX_GUESSES - counter) + " guesses left \n");
+            guess = userInput.nextInt();
+            if (guess == targetNumber){
+                System.out.println("You got the right number! " + guess);
+                break;
+            } else if (guess > targetNumber) {
+                System.out.println("Wrong number (too high), try again");
+
+            }else {
+                System.out.println("Wrong number (too low), try again");
+            }
+            counter++;
+
+        }while (counter < MAX_GUESSES);
+
+        if (guess != targetNumber){
+            System.out.println("too bad! The answer was: " + targetNumber);
+        }
     }
 
     public void startForLoopVersion(){
@@ -77,11 +99,53 @@ public class NumberGuesser {
         ThreadLocalRandom random = ThreadLocalRandom.current();
         targetNumber = random.nextInt(1, 101); // best - more random
 
+        for (int i = 0; i < MAX_GUESSES; i++){
+            System.out.println("*** What is your guess (Between 1 and 100)? ***");
+            System.out.println((MAX_GUESSES - i) + " guesses left \n");
+            guess = userInput.nextInt();
+            if (guess == targetNumber){
+                System.out.println("You got the right number! " + guess);
+                break;
+            } else if (guess > targetNumber) {
+                System.out.println("Wrong number (too high), try again");
+
+            }else {
+                System.out.println("Wrong number (too low), try again");
+            }
+        }
+        if (guess != targetNumber){
+            System.out.println("too bad! The answer was: " + targetNumber);
+        }
+
     }
 
     public void startRecursionVersion(){
         System.out.println("Recursion Version");
         ThreadLocalRandom random = ThreadLocalRandom.current();
         targetNumber = random.nextInt(1, 101); // best - more random
+
+        recursiveGuesser(targetNumber, false,0);
+    }
+
+    public void recursiveGuesser (int targetNumber, boolean solved, int counter){
+        if (solved){
+            System.out.println("You got the right number! " + targetNumber);
+        } else {
+            if (counter >= MAX_GUESSES){
+                System.out.println("too bad! The answer was: " + targetNumber);
+            } else {
+                System.out.println("*** What is your guess (Between 1 and 100)? ***");
+                System.out.println((MAX_GUESSES - counter) + " guesses left \n");
+                guess = userInput.nextInt();
+
+                if (guess < targetNumber){
+                    System.out.println("Wrong number (too low), try again");
+                } else if (guess > targetNumber) {
+                    System.out.println("Wrong number (too high), try again");
+                }
+
+                recursiveGuesser(targetNumber, (targetNumber == guess), counter + 1);
+            }
+        }
     }
 }
