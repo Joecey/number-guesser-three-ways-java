@@ -1,3 +1,5 @@
+package ie.atu.sw;
+
 public class ReverseString {
     private ReverseString(){}
 

@@ -1,3 +1,5 @@
+package ie.atu.sw;
+
 import java.util.Scanner;
 
 public class Runner {

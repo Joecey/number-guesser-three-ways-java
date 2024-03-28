@@ -1,3 +1,5 @@
+package ie.atu.sw;
+
 import java.util.Random;
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
